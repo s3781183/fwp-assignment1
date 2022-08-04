@@ -20,6 +20,8 @@ const SignUp = () => {
       setError(true);
     } else if (!(confirmPassword === password)) {
       setError(true);
+    } else if (!email.match(/.+@+/)) {
+      setError(true);
     } else {
       setSubmitted(true);
       setError(false);
@@ -85,15 +87,6 @@ const SignUp = () => {
         {errorMessage()}
         {successMessage()}
       </div>
-      <div className="email">
-        <label for="email">email </label>
-        <input
-          type="text"
-          value={email}
-          onChange={onChangeEmail}
-          placeholder="email"
-        />
-      </div>
       <div>
         <label for="lastName"> Name </label>
         <input
@@ -103,6 +96,15 @@ const SignUp = () => {
           placeholder="LastName"
           value={name}
           onChange={onChangeName}
+        />
+      </div>
+      <div className="email">
+        <label for="email">email </label>
+        <input
+          type="email"
+          value={email}
+          onChange={onChangeEmail}
+          placeholder="email"
         />
       </div>
       <div>
