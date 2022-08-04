@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const SignUp = () => {
   const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -13,7 +13,7 @@ const SignUp = () => {
     e.preventDefault();
     if (
       name === "" ||
-      username === "" ||
+      email === "" ||
       password === "" ||
       confirmPassword === ""
     ) {
@@ -24,7 +24,7 @@ const SignUp = () => {
       setSubmitted(true);
       setError(false);
       localStorage.setItem("name", name);
-      localStorage.setItem("username", username);
+      localStorage.setItem("email", email);
       localStorage.setItem("password", password);
     }
   };
@@ -37,7 +37,7 @@ const SignUp = () => {
           display: submitted ? "" : "none",
         }}
       >
-        <h1>User {username} successfully registered!!</h1>
+        <h1>User {email} successfully registered!!</h1>
       </div>
     );
   };
@@ -65,8 +65,8 @@ const SignUp = () => {
     setSubmitted(false);
   };
 
-  function onChangeUsername(e) {
-    setUsername(e.target.value);
+  function onChangeEmail(e) {
+    setEmail(e.target.value);
     setSubmitted(false);
   }
   function onChangePassword(e) {
@@ -75,7 +75,7 @@ const SignUp = () => {
   }
 
   //   function getData() {
-  //     console.log("username:" + localStorage.getItem("username"));
+  //     console.log("email:" + localStorage.getItem("email"));
   //     console.log("password:" + localStorage.getItem("password"));
   //   }
 
@@ -85,13 +85,13 @@ const SignUp = () => {
         {errorMessage()}
         {successMessage()}
       </div>
-      <div className="username">
-        <label for="username">username </label>
+      <div className="email">
+        <label for="email">email </label>
         <input
           type="text"
-          value={username}
-          onChange={onChangeUsername}
-          placeholder="Username"
+          value={email}
+          onChange={onChangeEmail}
+          placeholder="email"
         />
       </div>
       <div>
