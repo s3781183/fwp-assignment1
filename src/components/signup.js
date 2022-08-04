@@ -1,6 +1,6 @@
 import React from 'react'
 
-function signup() {
+function SignUp() {
   return (
     <div classname ="form-content-right">
       <form classname ="form">
@@ -22,4 +22,4 @@ function signup() {
   )
 }
 
-export default signup
+export default SignUp;
