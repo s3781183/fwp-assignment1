@@ -3,8 +3,18 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 40vmin; 
   pointer-events: none;
+}
+
+body {
+  background-color: #CBCE91FF;
+}
+h1 {
+  color: #EA738DFF;
+}
+p {
+  color: red;
 }
 
 @media (prefers-reduced-motion: no-preference) {

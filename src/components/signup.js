@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SignUp.css";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -82,57 +83,64 @@ const SignUp = () => {
   //   }
 
   return (
-    <div classname="form">
+    <div class="container">
       <div className="messages">
         {errorMessage()}
         {successMessage()}
       </div>
-      <div>
-        <label for="lastName"> Name </label>
-        <input
-          type="text"
-          name=""
-          className="form__input"
-          placeholder="LastName"
-          value={name}
-          onChange={onChangeName}
-        />
-      </div>
-      <div className="email">
-        <label for="email">email </label>
-        <input
-          type="email"
-          value={email}
-          onChange={onChangeEmail}
-          placeholder="email"
-        />
-      </div>
-      <div>
-        <label for="password">Password </label>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={onChangePassword}
-        />
-      </div>
-      <div>
-        <label for="confirmPassword">Confirm Password </label>
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={onChangeConfirmPassword}
-        />
-      </div>
-      <div class="footer">
-        <button onClick={handleSubmit} className="btn" type="submit">
-          Submit
-        </button>
-        {/* <button type="button" onClick={getData}>
+      <form>
+        <div>
+          <label for="lastName"> Name </label>
+          <input
+            type="text"
+            name=""
+            className="form__input"
+            placeholder="LastName"
+            value={name}
+            onChange={onChangeName}
+          />
+        </div>
+        <div className="email">
+          <label for="email">email </label>
+          <input
+            type="email"
+            value={email}
+            onChange={onChangeEmail}
+            placeholder="email"
+          />
+        </div>
+        <div>
+          <label for="password">Password </label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={onChangePassword}
+          />
+        </div>
+        <div>
+          <label for="confirmPassword">Confirm Password </label>
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={onChangeConfirmPassword}
+          />
+        </div>
+        <div class="footer">
+          <button onClick={handleSubmit} className="btn" type="submit">
+            Submit
+          </button>
+          {/* <button type="button" onClick={getData}>
           Get Data
         </button> */}
-      </div>
+        </div>
+        <div class="container signin">
+          <p>
+            Already have an account? <a href="#">Sign in</a>.
+          </p>
+        </div>
+      </form>
     </div>
   );
 };
