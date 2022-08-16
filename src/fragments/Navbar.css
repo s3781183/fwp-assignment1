@@ -3,7 +3,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #EA738DFF;
+  background-color: rgb(93, 113, 28);;
   position: fixed;
   top: 0;
   width: 100%;
@@ -16,7 +16,7 @@ li {
 
 li a {
   display: block;
-  color: #CBCE91FF;
+  color: rgb(169, 188, 109);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -24,8 +24,8 @@ li a {
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-  background-color: #CBCE91FF;
-  color: #EA738DFF;
+  background-color: rgb(169, 188, 109);
+  color: rgb(93, 113, 28);;
 }
 
 .active {

@@ -8,10 +8,10 @@
 }
 
 body {
-  background-color: #CBCE91FF;
+  background-color: rgb(169, 188, 109);
 }
 h1 {
-  color: #EA738DFF;
+  color: rgb(93, 113, 28);
 }
 p {
   color: red;
