@@ -1,5 +1,6 @@
 import "./App.css";
 import Navbar from "./fragments/Navbar";
+import Footer from "./fragments/Footer";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUp from "./components/SignUp";
@@ -19,6 +20,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+      <Footer />
     </div>
   );
 }
