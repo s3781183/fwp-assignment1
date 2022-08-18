@@ -137,7 +137,7 @@ const SignUp = () => {
         </div>
         <div class="container signin">
           <p>
-            Already have an account? <a href="#">Sign in</a>.
+            Already have an account? <a href="/sign-in">Sign in</a>.
           </p>
         </div>
       </form>
