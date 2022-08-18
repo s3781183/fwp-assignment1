@@ -51,7 +51,7 @@ function Login(props) {
       <hr />
       <div className="row">
         <div className="col-md-6">
-          <form class="modal-content animate" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="username" className="control-label">
                 Username
