@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 function SignIn({onLogIn}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    var [error, setError] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     
  
@@ -23,14 +23,13 @@ function SignIn({onLogIn}) {
             navigate('/');
             onLogIn(email);
         } else {
-            setError('Sign in failed. Please try again.')
+            setError('Sign in failed. Please try again.');
 
         }
 
     }
 
     return(
-        <>
         <div>
             <div>
                 <form onSubmit={onSubmit}>
@@ -42,15 +41,16 @@ function SignIn({onLogIn}) {
                         <label>Password</label>
                         <input type="password" value={password} onChange={onChangePassword} />
                     </div>
-                    {error !== '' &&<div>{error}</div>}
+                    {error !== '' && (
+                        <div>
+                          <span>{error}</span>
+                        </div>
+                      )}
                     <button type="submit">Submit</button>
                 </form>
             </div>
         </div>
-    </>
     );
-
-
 }
 
 export default SignIn;

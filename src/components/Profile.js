@@ -11,11 +11,9 @@ const Card = () => {
           style={{ width: "100%" }}
         />
         <h1>{localStorage.getItem("name")}</h1>
-        <p className="email">Email: {localStorage.getItem("email")}</p>
-
-        <p>
-          <button>Edit</button>
-        </p>
+        Email: {localStorage.getItem("email")}
+        <p></p>
+        Joined: {localStorage.getItem("time")}
       </div>
     </div>
   );
