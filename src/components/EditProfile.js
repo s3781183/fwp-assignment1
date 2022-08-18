@@ -20,15 +20,12 @@ const SignUp = () => {
       confirmPassword === ""
     ) {
       setError(true);
-    } else if (!(confirmPassword === password)) {
-      setError(true);
     } else if (!email.match(/.+@+/)) {
       setError(true);
     } else {
       setSubmitted(true);
       setError(false);
       getCurrentDate();
-      localStorage.setItem("date", date);
       localStorage.setItem("name", name);
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
@@ -95,7 +92,7 @@ const SignUp = () => {
         {errorMessage()}
         {successMessage()}
       </div>
-      <form class="modal-content">
+      <form>
         <div>
           <label for="lastName"> Name </label>
           <input
@@ -108,7 +105,7 @@ const SignUp = () => {
           />
         </div>
         <div className="email">
-          <label for="email">Email </label>
+          <label for="email">email </label>
           <input
             type="email"
             value={email}
@@ -125,27 +122,10 @@ const SignUp = () => {
             onChange={onChangePassword}
           />
         </div>
-        <div>
-          <label for="confirmPassword">Confirm Password </label>
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={onChangeConfirmPassword}
-          />
-        </div>
         <div class="footer">
           <button onClick={handleSubmit} className="btn" type="submit">
             Submit
           </button>
-          {/* <button type="button" onClick={getData}>
-          Get Data
-        </button> */}
-        </div>
-        <div class="center">
-          <p>
-            Already have an account? <a href="#">Sign in</a>.
-          </p>
         </div>
       </form>
     </div>
