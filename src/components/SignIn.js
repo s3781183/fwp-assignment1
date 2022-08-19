@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-function SignIn({onLogIn}) {
+function SignIn({onSignIn}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -18,12 +18,15 @@ function SignIn({onLogIn}) {
     function onSubmit(e) {
         setError('');
         e.preventDefault();
+        console.log(email, password);
 
         if(email === localStorage.getItem('email') && password === localStorage.getItem('password')) {
+            onSignIn(email);
             navigate('/');
-            onLogIn(email);
+
         } else {
             setError('Sign in failed. Please try again.');
+            console.log(error);
 
         }
 
@@ -34,12 +37,12 @@ function SignIn({onLogIn}) {
             <div>
                 <form onSubmit={onSubmit}>
                     <div>
-                        <label>Username</label>
-                        <input type="text" value={email} onChange={onChangeEmail} />
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="john@example.com" value={email} onChange={onChangeEmail} />
                     </div>
                     <div>
                         <label>Password</label>
-                        <input type="password" value={password} onChange={onChangePassword} />
+                        <input type="password" name="password" placeholder="password" value={password} onChange={onChangePassword} />
                     </div>
                     {error !== '' && (
                         <div>

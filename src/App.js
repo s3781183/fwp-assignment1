@@ -9,18 +9,19 @@ import Profile from "./components/Profile";
 import SignIn from "./components/SignIn";
 
 function App() {
-  const [signedInUser, setSignedInUser] = useState(null);
+  const [signedInUser, setSignedInUser] = useState(localStorage.getItem('signedInUser'));
   //const navigate = useNavigate();
 
   const onSignIn = email => {
     setSignedInUser(email);
-
+    localStorage.setItem('signedInUser', email);
 
   };
 
   const onSignOut = () => {
     //navigate('/', {replace:true});
     setSignedInUser(null);
+    localStorage.removeItem('signedInUser');
   };
 
   return (

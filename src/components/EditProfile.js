@@ -6,7 +6,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [date, setDate] = useState("");
+  // const [date, setDate] = useState("");
 
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
@@ -25,16 +25,16 @@ const SignUp = () => {
     } else {
       setSubmitted(true);
       setError(false);
-      getCurrentDate();
+      // getCurrentDate();
       localStorage.setItem("name", name);
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
       console.log("date:" + localStorage.getItem("date"));
     }
   };
-  function getCurrentDate() {
-    setDate(new Date.toISOString().slice(0, 10));
-  }
+  // function getCurrentDate() {
+  //   setDate(new Date.toISOString().slice(0, 10));
+  // }
 
   const successMessage = () => {
     return (

@@ -6,7 +6,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [date, setDate] = useState("");
+  // const [date, setDate] = useState("");
 
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
@@ -27,17 +27,17 @@ const SignUp = () => {
     } else {
       setSubmitted(true);
       setError(false);
-      getCurrentDate();
-      localStorage.setItem("date", date);
+      // getCurrentDate();
+      //localStorage.setItem("date", date);
       localStorage.setItem("name", name);
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
-      console.log("date:" + localStorage.getItem("date"));
+      //console.log("date:" + localStorage.getItem("date"));
     }
   };
-  function getCurrentDate() {
-    setDate(new Date.toISOString().slice(0, 10));
-  }
+  // function getCurrentDate() {
+  //   setDate(new Date.toISOString().slice(0, 10));
+  // }
 
   const successMessage = () => {
     return (
@@ -95,7 +95,7 @@ const SignUp = () => {
         {errorMessage()}
         {successMessage()}
       </div>
-      <form class="modal-content">
+      <form class="modal-content" onSubmit={handleSubmit}>
         <div>
           <label for="lastName"> Name </label>
           <input
@@ -135,12 +135,7 @@ const SignUp = () => {
           />
         </div>
         <div class="footer">
-          <button onClick={handleSubmit} className="btn" type="submit">
-            Submit
-          </button>
-          {/* <button type="button" onClick={getData}>
-          Get Data
-        </button> */}
+          <button className="btn" type="submit">Submit </button>
         </div>
         <div class="center">
           <p>
