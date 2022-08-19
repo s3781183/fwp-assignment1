@@ -7,7 +7,7 @@ function Navbar(props) {
 
   function onSignOut() {
     navigate('/');
-    props.setSignedInUser(null);
+    props.onSignOut();
 
   }
 
@@ -21,7 +21,7 @@ function Navbar(props) {
             </li>
           </ul>
           <ul className="navbar-nav">
-            {props.loggedInUser === null ? (
+            {props.signedInUser === null ? (
               <>         
                 <li className="nav-item">
                   <Link className="nav-link" to="/sign-up">Sign Up</Link>
