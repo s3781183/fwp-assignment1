@@ -6,38 +6,29 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const [date, setDate] = useState("");
+  const [date, setDate] = useState("");
 
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      name === "" ||
-      email === "" ||
-      password === "" ||
-      confirmPassword === ""
-    ) {
-      setError(true);
-    } else if (!(confirmPassword === password)) {
-      setError(true);
-    } else if (!email.match(/.+@+/)) {
-      setError(true);
+    if (!(confirmPassword === password)) {
+      setError("Ensure passwords match");
     } else {
       setSubmitted(true);
       setError(false);
-      // getCurrentDate();
-      //localStorage.setItem("date", date);
+      getCurrentDate();
+      localStorage.setItem("date", date);
       localStorage.setItem("name", name);
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
       //console.log("date:" + localStorage.getItem("date"));
     }
   };
-  // function getCurrentDate() {
-  //   setDate(new Date.toISOString().slice(0, 10));
-  // }
+  function getCurrentDate() {
+    setDate(new Date());
+  }
 
   const successMessage = () => {
     return (
@@ -48,19 +39,6 @@ const SignUp = () => {
         }}
       >
         <h1>User {email} successfully registered!!</h1>
-      </div>
-    );
-  };
-
-  const errorMessage = () => {
-    return (
-      <div
-        className="error"
-        style={{
-          display: error ? "" : "none",
-        }}
-      >
-        <h2>Please enter all the fields</h2>
       </div>
     );
   };
@@ -92,17 +70,18 @@ const SignUp = () => {
   return (
     <div class="container">
       <div className="messages">
-        {errorMessage()}
+        {error && <div className="error"> {error} </div>}
         {successMessage()}
       </div>
       <form class="modal-content" onSubmit={handleSubmit}>
         <div>
-          <label for="lastName"> Name </label>
+          <label for="name"> Name </label>
           <input
             type="text"
             name=""
+            required="required"
             className="form__input"
-            placeholder="LastName"
+            placeholder="Name"
             value={name}
             onChange={onChangeName}
           />
@@ -111,15 +90,17 @@ const SignUp = () => {
           <label for="email">Email </label>
           <input
             type="email"
+            required="required"
             value={email}
             onChange={onChangeEmail}
-            placeholder="email"
+            placeholder="Email"
           />
         </div>
         <div>
           <label for="password">Password </label>
           <input
             type="password"
+            required="required"
             placeholder="Password"
             value={password}
             onChange={onChangePassword}
@@ -129,13 +110,16 @@ const SignUp = () => {
           <label for="confirmPassword">Confirm Password </label>
           <input
             type="password"
+            required="required"
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={onChangeConfirmPassword}
           />
         </div>
         <div class="footer">
-          <button className="btn" type="submit">Submit </button>
+          <button className="btn" type="submit">
+            Submit
+          </button>
         </div>
         <div class="center">
           <p>
