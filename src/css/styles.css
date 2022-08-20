@@ -26,21 +26,6 @@ form{
     border-radius: 15px;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #cccccc;
-}
-
-ul.course{
-    width: 150px;
-    height: 500px;
-    float: left;
-    margin-right: 20px;
-}
-
 li {
     float: left;
 }
