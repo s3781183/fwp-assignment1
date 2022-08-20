@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./css/SignUp.css";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -94,20 +93,21 @@ const SignUp = () => {
       </div>
       <form>
         <div>
-          <label for="lastName"> Name </label>
+          <label for="name"> Name </label>
           <input
+            autocomplete="off"
             type="text"
             name=""
             className="form__input"
-            placeholder="LastName"
-            value={name}
+            placeholder="Name"
+            value={localStorage.getItem("name")}
             onChange={onChangeName}
           />
         </div>
         <div className="email">
           <label for="email">email </label>
           <input
-            type="email"
+            type="Email"
             value={email}
             onChange={onChangeEmail}
             placeholder="email"
@@ -124,7 +124,7 @@ const SignUp = () => {
         </div>
         <div class="footer">
           <button onClick={handleSubmit} className="btn" type="submit">
-            Submit
+            Save Change
           </button>
         </div>
       </form>
