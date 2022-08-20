@@ -28,7 +28,7 @@ function App() {
     <div className="d-flex flex-column min-vh-100">
       <BrowserRouter>
         <Navbar signedInUser={signedInUser} onSignOut = {onSignOut}/>
-        <div>
+        <div className="App">
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/sign-up" element={<SignUp />} />

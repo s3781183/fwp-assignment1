@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import '../css/SignIn.css';
+import '../css/styles.css';
 
 function SignIn({onSignIn}) {
     const [email, setEmail] = useState('');
@@ -26,33 +28,35 @@ function SignIn({onSignIn}) {
 
         } else {
             setError('Sign in failed. Please try again.');
-            console.log(error);
-
         }
 
     }
 
     return(
-        <div>
+        <div className="body">
+            <br/>
+            <br/>
             <div>
-                <form onSubmit={onSubmit}>
-                    <div>
-                        <label>Email</label>
-                        <input type="email" name="email" placeholder="john@example.com" value={email} onChange={onChangeEmail} />
-                    </div>
-                    <div>
-                        <label>Password</label>
-                        <input type="password" name="password" placeholder="password" value={password} onChange={onChangePassword} />
-                    </div>
-                    {error !== '' && (
-                        <div>
-                          <span>{error}</span>
-                        </div>
-                      )}
-                    <button type="submit">Submit</button>
-                </form>
+                <h1>Student Login</h1>
             </div>
-        </div>
+            {error !== '' && (
+                <div className="center">
+                    <div className="errorMsg">
+                        <p class="error">{error}</p>
+                    </div>
+                </div>
+            )}
+            <form className ="login" onSubmit={onSubmit}>
+                <label className='label'>Email</label>
+                <br/>
+                <input className='auth-form' type="email" name="email" placeholder="john@example.com" value={email} onChange={onChangeEmail} />
+                <br/>
+                <label className='label'>Password</label>
+                <br/>
+                <input className='auth-form'type="password" name="password" placeholder="password" value={password} onChange={onChangePassword} />
+                <button className="auth-form"type="submit">Submit</button>
+            </form>
+         </div>
     );
 }
 
