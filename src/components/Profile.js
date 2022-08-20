@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../App";
 
-const Card = () => {
+const Profile = () => {
+  const navigate = useNavigate();
+
+  const editProfile = () => {
+    navigate("/edit-profile");
+  };
+
   return (
     <div>
       <div className="card">
@@ -15,7 +22,8 @@ const Card = () => {
         <p></p>
         Joined: {localStorage.getItem("time")}
       </div>
+      <button onClick={editProfile}>Edit Profile</button>
     </div>
   );
 };
-export default Card;
+export default Profile;
