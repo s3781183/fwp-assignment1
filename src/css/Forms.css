@@ -14,6 +14,7 @@ label.label {
     width: 50%;
     color: #000;
     font-weight: bold;
+    justify-content: left;
 }
 
 p.error {
@@ -22,7 +23,7 @@ p.error {
     color: #000;
 }
 
-form.login {
+form.forms {
     width: 40%;
     border: 2px solid rgb(93, 113, 28);
     padding: 5px;
@@ -37,8 +38,8 @@ div.errorMsg {
     height: 60px;
     border: 2px solid #ff0000;
     background: #ff8888;
-    border-radius: 10px;
-}:
+
+}
 
 * {
     font-family: tahoma;

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import '../css/SignIn.css';
+import '../css/Forms.css';
 import '../css/styles.css';
 
 function SignIn({onSignIn}) {
@@ -36,9 +36,7 @@ function SignIn({onSignIn}) {
         <div className="body">
             <br/>
             <br/>
-            <div>
-                <h1>Student Login</h1>
-            </div>
+
             {error !== '' && (
                 <div className="center">
                     <div className="errorMsg">
@@ -46,14 +44,17 @@ function SignIn({onSignIn}) {
                     </div>
                 </div>
             )}
-            <form className ="login" onSubmit={onSubmit}>
+            <form className ="forms" onSubmit={onSubmit}>
+                <div>
+                    <h1>Sign In</h1>
+                </div>
                 <label className='label'>Email</label>
                 <br/>
-                <input className='auth-form' type="email" name="email" placeholder="john@example.com" value={email} onChange={onChangeEmail} />
+                <input className='auth-form' type="email" name="email" placeholder="john@example.com" value={email} onChange={onChangeEmail} required/>
                 <br/>
                 <label className='label'>Password</label>
                 <br/>
-                <input className='auth-form'type="password" name="password" placeholder="password" value={password} onChange={onChangePassword} />
+                <input className='auth-form'type="password" name="password" placeholder="password" value={password} onChange={onChangePassword} required/>
                 <button className="auth-form"type="submit">Submit</button>
             </form>
          </div>

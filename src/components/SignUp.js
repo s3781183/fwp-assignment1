@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../css/SignUp.css";
+import "../css/Forms.css";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -9,15 +10,16 @@ const SignUp = () => {
   const [date, setDate] = useState("");
 
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError('');
     if (!(confirmPassword === password)) {
-      setError("Ensure passwords match");
+      setError("Ensure passwords match.");
     } else {
       setSubmitted(true);
-      setError(false);
+      setError('');
       getCurrentDate();
       localStorage.setItem("date", date);
       localStorage.setItem("name", name);
@@ -62,65 +64,61 @@ const SignUp = () => {
     setSubmitted(false);
   }
 
-  //   function getData() {
-  //     console.log("email:" + localStorage.getItem("email"));
-  //     console.log("password:" + localStorage.getItem("password"));
-  //   }
-
   return (
-    <div class="container">
-      <div className="messages">
-        {error && <div className="error"> {error} </div>}
+    <div class="body">
+      <br/>
+      <br/>
+        {error !== '' && (
+         <div className="center errorMsg">
+           <p class="error">{error}</p>
+         </div>)}
         {successMessage()}
-      </div>
-      <form class="modal-content" onSubmit={handleSubmit}>
+      <form class="forms" onSubmit={handleSubmit}>
         <div>
-          <label for="name"> Name </label>
-          <input
+          <h1>Sign Up</h1>
+        </div>
+          <label className="label" for="name"> Name </label>
+          <br/>
+          <input className="auth-form"
             type="text"
-            name=""
             required="required"
-            className="form__input"
             placeholder="Name"
             value={name}
             onChange={onChangeName}
           />
-        </div>
-        <div className="email">
-          <label for="email">Email </label>
-          <input
+          <br/>
+          <label className="label" for="email">Email </label>
+          <br/>
+          <input className="auth-form"
             type="email"
             required="required"
             value={email}
             onChange={onChangeEmail}
             placeholder="Email"
           />
-        </div>
-        <div>
-          <label for="password">Password </label>
-          <input
+          <br/>
+          <label className="label"for="password">Password </label>
+          <br/>
+          <input className="auth-form"
             type="password"
             required="required"
             placeholder="Password"
             value={password}
             onChange={onChangePassword}
           />
-        </div>
-        <div>
-          <label for="confirmPassword">Confirm Password </label>
-          <input
+          <br/>
+          <label className="label" for="confirmPassword">Confirm Password </label>
+          <br/>
+          <input className="auth-form"
             type="password"
             required="required"
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={onChangeConfirmPassword}
           />
-        </div>
-        <div class="footer">
-          <button className="btn" type="submit">
+          <button className="auth-form" type="submit">
             Submit
           </button>
-        </div>
         <div class="center">
           <p>
             Already have an account? <a href="/sign-in">Sign in</a>.
