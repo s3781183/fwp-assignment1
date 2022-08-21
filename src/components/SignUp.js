@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../css/SignUp.css";
+import moment from "moment";
+// import "../css/SignUp.css";
 import "../css/Forms.css";
 
 const SignUp = () => {
@@ -10,37 +11,38 @@ const SignUp = () => {
   const [date, setDate] = useState("");
 
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     if (!(confirmPassword === password)) {
       setError("Ensure passwords match.");
     } else {
       setSubmitted(true);
-      setError('');
+      setError("");
       getCurrentDate();
       localStorage.setItem("date", date);
       localStorage.setItem("name", name);
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
-      //console.log("date:" + localStorage.getItem("date"));
+      console.log("date:" + localStorage.getItem("date"));
     }
   };
-  function getCurrentDate() {
-    setDate(new Date());
-  }
+  const getCurrentDate = () => {
+    const today = new Date();
+    setDate(moment(today).format("LL"));
+  };
 
   const successMessage = () => {
     return (
       <div
-        className="success"
+        className="center succMsg"
         style={{
           display: submitted ? "" : "none",
         }}
       >
-        <h1>User {email} successfully registered!!</h1>
+        <b>User {email} successfully registered!</b>
       </div>
     );
   };
@@ -65,61 +67,66 @@ const SignUp = () => {
   }
 
   return (
-    <div class="body">
-      <br/>
-      <br/>
-        {error !== '' && (
-         <div className="center errorMsg">
-           <p class="error">{error}</p>
-         </div>)}
-        {successMessage()}
-      <form class="forms" onSubmit={handleSubmit}>
+    <div className="body">
+      <br />
+      <br />
+      {error !== "" && (
+        <div className="center errorMsg">
+          <p className="error">{error}</p>
+        </div>
+      )}
+      {successMessage()}
+      <form className="forms" onSubmit={handleSubmit}>
         <div>
           <h1>Sign Up</h1>
         </div>
-          <label className="label" for="name"> Name </label>
-          <br/>
-          <input className="auth-form"
-            type="text"
-            required="required"
-            placeholder="Name"
-            value={name}
-            onChange={onChangeName}
-          />
-          <br/>
-          <label className="label" for="email">Email </label>
-          <br/>
-          <input className="auth-form"
-            type="email"
-            required="required"
-            value={email}
-            onChange={onChangeEmail}
-            placeholder="Email"
-          />
-          <br/>
-          <label className="label"for="password">Password </label>
-          <br/>
-          <input className="auth-form"
-            type="password"
-            required="required"
-            placeholder="Password"
-            value={password}
-            onChange={onChangePassword}
-          />
-          <br/>
-          <label className="label" for="confirmPassword">Confirm Password </label>
-          <br/>
-          <input className="auth-form"
-            type="password"
-            required="required"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={onChangeConfirmPassword}
-          />
-          <button className="auth-form" type="submit">
-            Submit
-          </button>
-        <div class="center">
+        <label className="label"> Name </label>
+        <br />
+        <input
+          className="auth-form"
+          type="text"
+          required="required"
+          placeholder="name"
+          value={name}
+          onChange={onChangeName}
+        />
+        <br />
+        <label className="label">Email </label>
+        <br />
+        <input
+          className="auth-form"
+          type="email"
+          required="required"
+          value={email}
+          onChange={onChangeEmail}
+          placeholder="email"
+        />
+        <br />
+        <label className="label">Password </label>
+        <br />
+        <input
+          className="auth-form"
+          type="password"
+          required="required"
+          placeholder="password"
+          value={password}
+          onChange={onChangePassword}
+        />
+        <br />
+        <label className="label">Confirm Password </label>
+        <br />
+        <input
+          className="auth-form"
+          type="password"
+          required="required"
+          placeholder="confirm password"
+          value={confirmPassword}
+          onChange={onChangeConfirmPassword}
+        />
+        <button className="auth-form" type="submit">
+          Submit
+        </button>
+        <div className="center">
           <p>
             Already have an account? <a href="/sign-in">Sign in</a>.
           </p>

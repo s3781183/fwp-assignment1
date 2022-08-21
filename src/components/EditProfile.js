@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import "../css/Forms.css";
 
-const SignUp = () => {
+const EditProfile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,19 +13,12 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      name === "" ||
-      email === "" ||
-      password === "" ||
-      confirmPassword === ""
-    ) {
-      setError(true);
-    } else if (!email.match(/.+@+/)) {
-      setError(true);
+    setError("");
+    if (!(confirmPassword === password)) {
+      setError("Ensure passwords match.");
     } else {
       setSubmitted(true);
-      setError(false);
-      // getCurrentDate();
+      setError("");
       localStorage.setItem("name", name);
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
@@ -43,20 +37,7 @@ const SignUp = () => {
           display: submitted ? "" : "none",
         }}
       >
-        <h1>User {email} successfully registered!!</h1>
-      </div>
-    );
-  };
-
-  const errorMessage = () => {
-    return (
-      <div
-        className="error"
-        style={{
-          display: error ? "" : "none",
-        }}
-      >
-        <h2>Please enter all the fields</h2>
+        <h1>User {email} successfully edited!!</h1>
       </div>
     );
   };
@@ -86,50 +67,64 @@ const SignUp = () => {
   //   }
 
   return (
-    <div class="container">
-      <div className="messages">
-        {errorMessage()}
-        {successMessage()}
-      </div>
-      <form>
+    <div className="body">
+      <br />
+      <br />
+      {error !== "" && <p className="error">{error}</p>}
+      {successMessage()}
+      <form className="forms" onSubmit={handleSubmit}>
         <div>
-          <label for="name"> Name </label>
-          <input
-            autocomplete="off"
-            type="text"
-            name=""
-            className="form__input"
-            placeholder="Name"
-            value={localStorage.getItem("name")}
-            onChange={onChangeName}
-          />
+          <h1>Edit Profile</h1>
         </div>
-        <div className="email">
-          <label for="email">email </label>
-          <input
-            type="Email"
-            value={email}
-            onChange={onChangeEmail}
-            placeholder="email"
-          />
-        </div>
-        <div>
-          <label for="password">Password </label>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={onChangePassword}
-          />
-        </div>
-        <div class="footer">
-          <button onClick={handleSubmit} className="btn" type="submit">
-            Save Change
-          </button>
-        </div>
+        <label className="label"> Name </label>
+        <br />
+        <input
+          className="auth-form"
+          type="text"
+          required="required"
+          placeholder="name"
+          defaultValue={localStorage.getItem("name")}
+          onChange={onChangeName}
+        />
+        <br />
+        <label className="label">Email </label>
+        <br />
+        <input
+          className="auth-form"
+          type="email"
+          required="required"
+          defaultValue={localStorage.getItem("email")}
+          onChange={onChangeEmail}
+          placeholder="email"
+        />
+        <br />
+        <label className="label">Password </label>
+        <br />
+        <input
+          className="auth-form"
+          type="password"
+          required="required"
+          placeholder="password"
+          defaultValue={localStorage.getItem("password")}
+          onChange={onChangePassword}
+        />
+        <br />
+        <label className="label">Confirm Password </label>
+        <br />
+        <input
+          className="auth-form"
+          type="password"
+          required="required"
+          placeholder="confirm password"
+          defaultValue={localStorage.getItem("password")}
+          onChange={onChangeConfirmPassword}
+        />
+        <button className="auth-form" type="submit">
+          Submit Changes
+        </button>
       </form>
     </div>
   );
 };
 
-export default SignUp;
+export default EditProfile;
