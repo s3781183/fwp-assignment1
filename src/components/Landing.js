@@ -1,4 +1,4 @@
-import logo from "./online-work.jpg";
+import image from "./online-work.jpg";
 function Landing() {
   return (
     <div>
@@ -21,9 +21,9 @@ function Landing() {
         profile details.
       </div>
       <br></br>
-      <div className="logo">
+      <div>
         <img
-          src={logo}
+          src={image}
           alt="https://unsplash.com/photos/tMI2_-r5Nfo"
           width="400"
           height="200"
