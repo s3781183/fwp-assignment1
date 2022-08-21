@@ -20,7 +20,7 @@ const Profile = () => {
         <h1>{localStorage.getItem("name")}</h1>
         Email: {localStorage.getItem("email")}
         <p></p>
-        Joined: {localStorage.getItem("time")}
+        Joined: {localStorage.getItem("date")}
       </div>
       <button onClick={editProfile}>Edit Profile</button>
     </div>
