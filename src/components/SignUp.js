@@ -8,7 +8,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [date, setDate] = useState("");
+  const [date] = useState(moment(new Date()).format("LL"));
 
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -19,19 +19,14 @@ const SignUp = () => {
     if (!(confirmPassword === password)) {
       setError("Ensure passwords match.");
     } else {
-      setSubmitted(true);
       setError("");
-      getCurrentDate();
       localStorage.setItem("date", date);
       localStorage.setItem("name", name);
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
       console.log("date:" + localStorage.getItem("date"));
+      setSubmitted(true);
     }
-  };
-  const getCurrentDate = () => {
-    const today = new Date();
-    setDate(moment(today).format("LL"));
   };
 
   const successMessage = () => {

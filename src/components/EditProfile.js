@@ -2,75 +2,72 @@ import React, { useState } from "react";
 import "../css/Forms.css";
 
 const EditProfile = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  // const [date, setDate] = useState("");
-
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
-    if (!(confirmPassword === password)) {
+    if (
+      !(
+        document.getElementById("password").value ===
+        document.getElementById("confirmPassword").value
+      )
+    ) {
       setError("Ensure passwords match.");
     } else {
+      localStorage.setItem(
+        "confirmPassword",
+        document.getElementById("confirmPassword").value
+      );
+      localStorage.setItem(
+        "password",
+        document.getElementById("password").value
+      );
       setSubmitted(true);
       setError("");
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
-      localStorage.setItem("password", password);
-      console.log("date:" + localStorage.getItem("date"));
     }
   };
-  // function getCurrentDate() {
-  //   setDate(new Date.toISOString().slice(0, 10));
-  // }
 
   const successMessage = () => {
     return (
       <div
-        className="success"
+        className="center succMsg"
         style={{
           display: submitted ? "" : "none",
         }}
       >
-        <h1>User {email} successfully edited!!</h1>
+        <b>User {localStorage.getItem("email")} successfully edited!</b>
       </div>
     );
   };
 
   const onChangeConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value);
     setSubmitted(false);
   };
 
+  const onChangePassword = (e) => {
+    setSubmitted(false);
+  };
   const onChangeName = (e) => {
-    setName(e.target.value);
+    localStorage.setItem("name", e.target.value);
     setSubmitted(false);
   };
 
-  function onChangeEmail(e) {
-    setEmail(e.target.value);
+  const onChangeEmail = (e) => {
+    localStorage.setItem("email", e.target.value);
     setSubmitted(false);
-  }
-  function onChangePassword(e) {
-    setPassword(e.target.value);
-    setSubmitted(false);
-  }
-
-  //   function getData() {
-  //     console.log("email:" + localStorage.getItem("email"));
-  //     console.log("password:" + localStorage.getItem("password"));
-  //   }
+  };
 
   return (
     <div className="body">
       <br />
       <br />
-      {error !== "" && <p className="error">{error}</p>}
+      {error !== "" && (
+        <div className="center errorMsg">
+          <p className="error">{error}</p>
+        </div>
+      )}
       {successMessage()}
       <form className="forms" onSubmit={handleSubmit}>
         <div>
@@ -101,6 +98,7 @@ const EditProfile = () => {
         <label className="label">Password </label>
         <br />
         <input
+          id="password"
           className="auth-form"
           type="password"
           required="required"
@@ -112,6 +110,7 @@ const EditProfile = () => {
         <label className="label">Confirm Password </label>
         <br />
         <input
+          id="confirmPassword"
           className="auth-form"
           type="password"
           required="required"
