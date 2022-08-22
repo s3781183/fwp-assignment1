@@ -18,6 +18,7 @@ const SignUp = () => {
     setError("");
     if (!(confirmPassword === password)) {
       setError("Ensure passwords match.");
+    } else if (password.length < 8) {
     } else {
       setError("");
       localStorage.setItem("date", date);
@@ -97,11 +98,12 @@ const SignUp = () => {
           placeholder="email"
         />
         <br />
-        <label className="label">Password </label>
+        <label className="label">Password (min 8 characters) </label>
         <br />
         <input
           className="auth-form"
           type="password"
+          minlength="8"
           required="required"
           placeholder="password"
           value={password}
