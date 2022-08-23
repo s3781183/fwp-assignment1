@@ -21,11 +21,18 @@ const SignUp = () => {
     } else if (password.length < 8) {
     } else {
       setError("");
-      localStorage.setItem("date", date);
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
-      localStorage.setItem("password", password);
-      console.log("date:" + localStorage.getItem("date"));
+      var user = {
+        email: email,
+        name: name,
+        date: date,
+        password: password,
+      };
+
+      var json = JSON.stringify(user);
+      localStorage.setItem(email, json);
+      // console.log(localStorage.getItem("ss@ss"));
+      // console.log(JSON.parse(localStorage.getItem("ss@ss")).date);
+      // console.log(myObj.email);
       setSubmitted(true);
     }
   };
@@ -103,7 +110,7 @@ const SignUp = () => {
         <input
           className="auth-form"
           type="password"
-          minlength="8"
+          minLength="8"
           required="required"
           placeholder="password"
           value={password}

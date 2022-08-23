@@ -2,28 +2,39 @@ import React, { useState } from "react";
 import "../css/Forms.css";
 
 const EditProfile = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
-    if (
-      !(
-        document.getElementById("password").value ===
-        document.getElementById("confirmPassword").value
-      )
-    ) {
+    if (!(password === confirmPassword)) {
       setError("Ensure passwords match.");
     } else {
-      localStorage.setItem(
-        "confirmPassword",
-        document.getElementById("confirmPassword").value
-      );
-      localStorage.setItem(
-        "password",
-        document.getElementById("password").value
-      );
+      // localStorage.setItem(
+      //   "confirmPassword",
+      //   document.getElementById("confirmPassword").value
+      // );
+      // localStorage.setItem(
+      //   "password",
+      //   document.getElementById("password").value
+      // );
+
+      var user = {
+        email: email,
+        name: name,
+        date: JSON.parse(
+          localStorage.getItem(localStorage.getItem("signedInUser"))
+        ).date,
+        password: password,
+      };
+      var json = JSON.stringify(user);
+      localStorage.setItem("signedInUser", email);
+      localStorage.setItem(email, json);
       setSubmitted(true);
       setError("");
     }
@@ -37,25 +48,35 @@ const EditProfile = () => {
           display: submitted ? "" : "none",
         }}
       >
-        <b>User {localStorage.getItem("email")} successfully edited!</b>
+        <b>
+          User{" "}
+          {
+            JSON.parse(
+              localStorage.getItem(localStorage.getItem("signedInUser"))
+            ).email
+          }{" "}
+          successfully edited!
+        </b>
       </div>
     );
   };
 
   const onChangeConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
     setSubmitted(false);
   };
 
   const onChangePassword = (e) => {
+    setPassword(e.target.value);
     setSubmitted(false);
   };
   const onChangeName = (e) => {
-    localStorage.setItem("name", e.target.value);
+    setName(e.target.value);
     setSubmitted(false);
   };
 
   const onChangeEmail = (e) => {
-    localStorage.setItem("email", e.target.value);
+    setEmail(e.target.value);
     setSubmitted(false);
   };
 
@@ -80,7 +101,11 @@ const EditProfile = () => {
           type="text"
           required="required"
           placeholder="name"
-          defaultValue={localStorage.getItem("name")}
+          defaultValue={
+            JSON.parse(
+              localStorage.getItem(localStorage.getItem("signedInUser"))
+            ).name
+          }
           onChange={onChangeName}
         />
         <br />
@@ -90,7 +115,7 @@ const EditProfile = () => {
           className="auth-form"
           type="email"
           required="required"
-          defaultValue={localStorage.getItem("email")}
+          defaultValue={localStorage.getItem("signedInUser")}
           onChange={onChangeEmail}
           placeholder="email"
         />
@@ -103,7 +128,11 @@ const EditProfile = () => {
           type="password"
           required="required"
           placeholder="password"
-          defaultValue={localStorage.getItem("password")}
+          defaultValue={
+            JSON.parse(
+              localStorage.getItem(localStorage.getItem("signedInUser"))
+            ).password
+          }
           onChange={onChangePassword}
         />
         <br />
@@ -115,7 +144,11 @@ const EditProfile = () => {
           type="password"
           required="required"
           placeholder="confirm password"
-          defaultValue={localStorage.getItem("password")}
+          defaultValue={
+            JSON.parse(
+              localStorage.getItem(localStorage.getItem("signedInUser"))
+            ).password
+          }
           onChange={onChangeConfirmPassword}
         />
         <button className="auth-form" type="submit">

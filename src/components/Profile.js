@@ -16,7 +16,7 @@ const Profile = () => {
   };
 
   const deleteProfile = () => {
-    localStorage.clear();
+    localStorage.removeItem(localStorage.getItem("signedInUser"));
     navigate("/");
   };
 
@@ -25,13 +25,23 @@ const Profile = () => {
       <div className="card">
         <img
           src="img.jpg"
-          alt={localStorage.getItem("name")}
+          alt={localStorage.getItem("signedInUser")}
           style={{ width: "100%" }}
         />
-        <h1>{localStorage.getItem("name")}</h1>
-        Email: {localStorage.getItem("email")}
+        <h1>
+          {
+            JSON.parse(
+              localStorage.getItem(localStorage.getItem("signedInUser"))
+            ).name
+          }
+        </h1>
+        Email: {localStorage.getItem("signedInUser")}
         <p></p>
-        Joined: {localStorage.getItem("date")}
+        Joined:{" "}
+        {
+          JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
+            .date
+        }
       </div>
       <div>
         <button onClick={editProfile}>Edit Profile</button>
@@ -44,16 +54,17 @@ const Profile = () => {
           <div onClick={togglePopup} className="background"></div>
           <div className="popup-content">
             <div>
-              <h2>Are you sure you would like to delete your account?</h2>
+              <h2>Delete Account</h2>
+              <h3>Confirm to delete your account</h3>
             </div>
             <div>
-              <button className="yes-popup" onClick={deleteProfile}>
-                YES
+              <button className="confirm-popup" onClick={deleteProfile}>
+                Confirm
               </button>
             </div>
             <div>
-              <button className="no-popup" onClick={togglePopup}>
-                NO
+              <button className="cancel-popup" onClick={togglePopup}>
+                Cancel
               </button>
             </div>
           </div>

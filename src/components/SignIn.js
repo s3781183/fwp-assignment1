@@ -19,11 +19,12 @@ function SignIn({ onSignIn }) {
   function onSubmit(e) {
     setError("");
     e.preventDefault();
-    console.log(email, password);
+    // console.log(email, password);
+    console.log(JSON.parse(localStorage.getItem(email)));
 
     if (
-      email === localStorage.getItem("email") &&
-      password === localStorage.getItem("password")
+      JSON.parse(localStorage.getItem(email)).email === email &&
+      JSON.parse(localStorage.getItem(email)).password === password
     ) {
       onSignIn(email);
       navigate("/profile");
@@ -40,7 +41,7 @@ function SignIn({ onSignIn }) {
       {error !== "" && (
         <div className="center">
           <div className="errorMsg">
-            <p class="error">{error}</p>
+            <p className="error">{error}</p>
           </div>
         </div>
       )}

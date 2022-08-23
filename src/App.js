@@ -8,6 +8,7 @@ import Landing from "./components/Landing";
 import Profile from "./components/Profile";
 import SignIn from "./components/SignIn";
 import EditProfile from "./components/EditProfile";
+import Post from "./components/Post";
 
 function App() {
   const [signedInUser, setSignedInUser] = useState(
@@ -37,6 +38,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/sign-in" element={<SignIn onSignIn={onSignIn} />} />
             <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/post" element={<Post />} />
           </Routes>
         </div>
       </BrowserRouter>
