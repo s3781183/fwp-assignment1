@@ -1,3 +1,8 @@
+any extra library used and why?
+any special instructions for the marker
+references
+any additional information that you may deem relevant
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

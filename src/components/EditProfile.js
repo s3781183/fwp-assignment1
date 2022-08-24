@@ -15,15 +15,6 @@ const EditProfile = () => {
     if (!(password === confirmPassword)) {
       setError("Ensure passwords match.");
     } else {
-      // localStorage.setItem(
-      //   "confirmPassword",
-      //   document.getElementById("confirmPassword").value
-      // );
-      // localStorage.setItem(
-      //   "password",
-      //   document.getElementById("password").value
-      // );
-
       var user = {
         email: email,
         name: name,
@@ -54,8 +45,8 @@ const EditProfile = () => {
             JSON.parse(
               localStorage.getItem(localStorage.getItem("signedInUser"))
             ).email
-          }{" "}
-          successfully edited!
+          }
+          Successfully edited!
         </b>
       </div>
     );

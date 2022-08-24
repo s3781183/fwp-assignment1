@@ -1,11 +1,9 @@
 import React, { useState } from "react";
+import moment from "moment";
 
-// NOTE: The posts are not persistent and will be lost when the component unmounts.
-// Could store the posts in localStorage, within the parent component, in a context, etc...
 function Forum(props) {
   const [post, setPost] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
-  const [posts, setPosts] = useState([]);
 
   const handleInputChange = (event) => {
     setPost(event.target.value);
@@ -13,21 +11,24 @@ function Forum(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (post.length === 0) {
+      setErrorMessage("Ensure post isnt empty.");
+    } else if (post.length > 250) {
+      setErrorMessage("Ensure post is less than 250 characters.");
+    } else {
+      setErrorMessage("");
 
-    // Trim the post text.
-    const postTrimmed = post.trim();
-
-    if (postTrimmed === "") {
-      setErrorMessage("A post cannot be empty.");
-      return;
+      var existingPosts = JSON.parse(localStorage.getItem("allPosts"));
+      if (existingPosts == null) existingPosts = [];
+      var newPost = {
+        author: localStorage.getItem("signedInUser"),
+        text: post,
+        date: moment(new Date()).format("LLLL"),
+      };
+      existingPosts.push(newPost);
+      localStorage.setItem("allPosts", JSON.stringify(existingPosts));
+      console.log(JSON.parse(localStorage.getItem("allPosts")));
     }
-
-    // Create post.
-    setPosts([...posts, { username: props.username, text: postTrimmed }]);
-
-    // Reset post content.
-    setPost("");
-    setErrorMessage("");
   };
 
   return (
@@ -68,13 +69,14 @@ function Forum(props) {
       <hr />
       <h1>Forum</h1>
       <div>
-        {posts.length === 0 ? (
+        {JSON.parse(localStorage.getItem("allPosts")) == null ? (
           <span className="text-muted">No posts have been submitted.</span>
         ) : (
-          posts.map((x) => (
+          JSON.parse(localStorage.getItem("allPosts")).map((x) => (
             <div className="border my-3 p-3" style={{ whiteSpace: "pre-wrap" }}>
-              <h3 className="text-primary">{x.username}</h3>
+              <h3 className="text-primary">{x.author}</h3>
               {x.text}
+              <h4 className="text-primary">{x.date}</h4>
             </div>
           ))
         )}

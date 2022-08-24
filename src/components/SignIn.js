@@ -22,7 +22,9 @@ function SignIn({ onSignIn }) {
     // console.log(email, password);
     console.log(JSON.parse(localStorage.getItem(email)));
 
-    if (
+    if (JSON.parse(localStorage.getItem(email)) === null) {
+      setError("Sign in failed. Please try again.");
+    } else if (
       JSON.parse(localStorage.getItem(email)).email === email &&
       JSON.parse(localStorage.getItem(email)).password === password
     ) {

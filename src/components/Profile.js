@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App";
 import "../css/Popup.css";
+import "../css/Profile.css";
 
-const Profile = () => {
+function Profile({ onSignOut }) {
   const [popup, setPopup] = useState(false);
   const navigate = useNavigate();
 
@@ -16,18 +17,28 @@ const Profile = () => {
   };
 
   const deleteProfile = () => {
+    var existingPosts = JSON.parse(localStorage.getItem("allPosts"));
+    var updatedPosts = [];
+    if (existingPosts != null) {
+      for (let i = 0; i < existingPosts.length; i++) {
+        console.log(existingPosts);
+        if (existingPosts[i].author !== localStorage.getItem("signedInUser")) {
+          updatedPosts.push(existingPosts[i]);
+        }
+      }
+      localStorage.setItem("allPosts", JSON.stringify(updatedPosts));
+    }
+    localStorage.removeItem("signedInUser");
     localStorage.removeItem(localStorage.getItem("signedInUser"));
+    onSignOut();
     navigate("/");
   };
 
   return (
     <div>
+      <br></br>
       <div className="card">
-        <img
-          src="img.jpg"
-          alt={localStorage.getItem("signedInUser")}
-          style={{ width: "100%" }}
-        />
+        <br></br>
         <h1>
           {
             JSON.parse(
@@ -37,7 +48,7 @@ const Profile = () => {
         </h1>
         Email: {localStorage.getItem("signedInUser")}
         <p></p>
-        Joined:{" "}
+        Joined:
         {
           JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
             .date
@@ -72,5 +83,5 @@ const Profile = () => {
       )}
     </div>
   );
-};
+}
 export default Profile;

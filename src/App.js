@@ -35,7 +35,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={<Profile onSignOut={onSignOut} />}
+            />
             <Route path="/sign-in" element={<SignIn onSignIn={onSignIn} />} />
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/post" element={<Post />} />
