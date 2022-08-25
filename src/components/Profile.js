@@ -43,6 +43,7 @@ function Profile({ onSignOut }) {
       <br></br>
       <div className="card">
         <br></br>
+        {/* <img class="material-icons">account_circle</img> */}
         <h1>
           {
             JSON.parse(
@@ -57,34 +58,38 @@ function Profile({ onSignOut }) {
           JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
             .date
         }
-      </div>
-      <div>
-        <button onClick={editProfile}>Edit Profile</button>
-      </div>
-      <div>
-        <button onClick={togglePopup}>Delete Profile</button>
-      </div>
-      {popup && (
-        <div className="popup">
-          <div onClick={togglePopup} className="background"></div>
-          <div className="popup-content">
-            <div>
-              <h2>Delete Account</h2>
-              <h3>Confirm to delete your account</h3>
-            </div>
-            <div>
-              <button className="confirm-popup" onClick={deleteProfile}>
-                Confirm
-              </button>
-            </div>
-            <div>
-              <button className="cancel-popup" onClick={togglePopup}>
-                Cancel
-              </button>
+        <div>
+          <button className="profile" onClick={editProfile}>
+            Edit Profile
+          </button>
+        </div>
+        <div>
+          <button className="profile" onClick={togglePopup}>
+            Delete Profile
+          </button>
+        </div>
+        {popup && (
+          <div className="popup">
+            <div onClick={togglePopup} className="background"></div>
+            <div className="popup-content">
+              <div>
+                <h2>Delete Account</h2>
+                <h3>Confirm to delete your account</h3>
+              </div>
+              <div>
+                <button className="confirm-popup" onClick={deleteProfile}>
+                  Confirm
+                </button>
+              </div>
+              <div>
+                <button className="cancel-popup" onClick={togglePopup}>
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

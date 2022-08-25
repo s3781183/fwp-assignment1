@@ -2,7 +2,7 @@ import image from "./online-work.jpg";
 function Landing() {
   return (
     <div>
-      <div className="card">
+      <div>
         <h1>Loop Agile Now (LAN)</h1>
         <i>
           <br></br>
