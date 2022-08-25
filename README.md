@@ -1,4 +1,4 @@
-any extra library used and why?
+any extra library used and why? firebase, moment
 any special instructions for the marker
 references
 any additional information that you may deem relevant

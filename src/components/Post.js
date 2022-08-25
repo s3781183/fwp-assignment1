@@ -1,29 +1,55 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase";
+import { v4 } from "uuid";
 
-function Forum(props) {
-  const [post, setPost] = useState("");
+function Forum() {
+  const [text, setText] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
 
-  const handleInputChange = (event) => {
-    setPost(event.target.value);
+  const handleTextChange = (event) => {
+    setText(event.target.value);
   };
+
+  const name = "123" + v4();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (post.length === 0) {
+    if (text.length === 0) {
       setErrorMessage("Ensure post isnt empty.");
-    } else if (post.length > 250) {
+    } else if (text.length > 250) {
       setErrorMessage("Ensure post is less than 250 characters.");
     } else {
       setErrorMessage("");
 
+      if (imageUpload != null) {
+        const imageRef = ref(storage, `images/${name}`);
+        uploadBytes(imageRef, imageUpload)
+          .then(() => {
+            getDownloadURL(imageRef)
+              .then((url) => {
+                setImageUrl(url);
+              })
+              .catch((error) => {
+                console.log(error.message, "error getting image url");
+              });
+          })
+          .catch((error) => {
+            console.log(error.message, "error getting image url");
+          });
+      }
       var existingPosts = JSON.parse(localStorage.getItem("allPosts"));
       if (existingPosts == null) existingPosts = [];
       var newPost = {
+        key: v4(),
         author: localStorage.getItem("signedInUser"),
-        text: post,
+        text: text,
         date: moment(new Date()).format("LLLL"),
+        image: imageUrl,
+        imageName: name,
       };
       existingPosts.push(newPost);
       localStorage.setItem("allPosts", JSON.stringify(existingPosts));
@@ -42,8 +68,16 @@ function Forum(props) {
               id="post"
               className="form-control"
               rows="3"
-              value={post}
-              onChange={handleInputChange}
+              value={text}
+              onChange={handleTextChange}
+            />
+          </div>
+          <div className="App">
+            <input
+              type="file"
+              onChange={(event) => {
+                setImageUpload(event.target.files[0]);
+              }}
             />
           </div>
           {errorMessage !== null && (
@@ -57,7 +91,7 @@ function Forum(props) {
               className="btn btn-danger mr-5"
               value="Cancel"
               onClick={() => {
-                setPost("");
+                setText("");
                 setErrorMessage(null);
               }}
             />
@@ -73,10 +107,19 @@ function Forum(props) {
           <span className="text-muted">No posts have been submitted.</span>
         ) : (
           JSON.parse(localStorage.getItem("allPosts")).map((x) => (
-            <div className="border my-3 p-3" style={{ whiteSpace: "pre-wrap" }}>
+            <div
+              className="border my-3 p-3"
+              style={{ whiteSpace: "pre-wrap" }}
+              key={x.key}
+            >
               <h3 className="text-primary">{x.author}</h3>
               {x.text}
               <h4 className="text-primary">{x.date}</h4>
+              {x.image !== "" ? (
+                <img src={x.image} alt={x.image} width="400" height="200"></img>
+              ) : (
+                <br></br>
+              )}
             </div>
           ))
         )}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { storage } from "../firebase";
 import "../App";
 import "../css/Popup.css";
 import "../css/Profile.css";
@@ -24,6 +25,9 @@ function Profile({ onSignOut }) {
         console.log(existingPosts);
         if (existingPosts[i].author !== localStorage.getItem("signedInUser")) {
           updatedPosts.push(existingPosts[i]);
+        } else {
+          let imageRef = storage(existingPosts[i].image);
+          imageRef.delete();
         }
       }
       localStorage.setItem("allPosts", JSON.stringify(updatedPosts));
