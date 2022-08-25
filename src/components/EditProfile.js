@@ -2,10 +2,20 @@ import React, { useState } from "react";
 import "../css/Forms.css";
 
 const EditProfile = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState(
+    JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser"))).name
+  );
+  const [email, setEmail] = useState(
+    JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser"))).email
+  );
+  const [password, setPassword] = useState(
+    JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
+      .password
+  );
+  const [confirmPassword, setConfirmPassword] = useState(
+    JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
+      .password
+  );
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
@@ -23,6 +33,7 @@ const EditProfile = () => {
         ).date,
         password: password,
       };
+      console.log(user);
       var json = JSON.stringify(user);
       localStorage.setItem("signedInUser", email);
       localStorage.setItem(email, json);
@@ -88,6 +99,7 @@ const EditProfile = () => {
         <label className="label"> Name </label>
         <br />
         <input
+          id="name"
           className="auth-form"
           type="text"
           required="required"
@@ -103,6 +115,7 @@ const EditProfile = () => {
         <label className="label">Email </label>
         <br />
         <input
+          id="email"
           className="auth-form"
           type="email"
           required="required"
