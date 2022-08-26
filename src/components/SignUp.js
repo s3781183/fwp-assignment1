@@ -31,6 +31,7 @@ const SignUp = () => {
       var json = JSON.stringify(user);
       localStorage.setItem(email, json);
       setSubmitted(true);
+      console.log(user);
     }
   };
 

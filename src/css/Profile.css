@@ -1,6 +1,7 @@
 .card{
-    position: fixed;
-    justify-content: center;
+    /* position: absolute; */
+    /* justify-content: center; */
+    margin: 100px;
     width: 20em;
     background-color: rgb(255, 255, 255);
     overflow: hidden;
@@ -10,19 +11,20 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border: 2px solid rgb(93, 113, 28);
+    /* padding: 5px; */
 }
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
 
-  section{
+  /* section{
     display: grid;
     }
     
     section > div {
     justify-self: center;
-    }
+    } */
   .container {
     padding: 2px
   }

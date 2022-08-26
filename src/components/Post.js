@@ -3,6 +3,7 @@ import moment from "moment";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
 import { v4 } from "uuid";
+import "../css/Post.css";
 
 function Forum() {
   const [text, setText] = useState("");
@@ -14,8 +15,6 @@ function Forum() {
     setText(event.target.value);
   };
 
-  const name = "123" + v4();
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (text.length === 0) {
@@ -26,9 +25,9 @@ function Forum() {
       setErrorMessage("");
 
       if (imageUpload != null) {
-        const imageRef = ref(storage, `images/${name}`);
+        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
         uploadBytes(imageRef, imageUpload)
-          .then(() => {
+          .then((snapshot) => {
             getDownloadURL(imageRef)
               .then((url) => {
                 setImageUrl(url);
@@ -49,7 +48,6 @@ function Forum() {
         text: text,
         date: moment(new Date()).format("LLLL"),
         image: imageUrl,
-        imageName: name,
       };
       existingPosts.push(newPost);
       localStorage.setItem("allPosts", JSON.stringify(existingPosts));
@@ -101,8 +99,31 @@ function Forum() {
       </form>
 
       <hr />
-      <h1>Forum</h1>
+      {/* <h1>Forum</h1>
       <div>
+        {JSON.parse(localStorage.getItem("allPosts")) == null ? (
+          <span className="text-muted">No posts have been submitted.</span>
+        ) : (
+          JSON.parse(localStorage.getItem("allPosts")).map((x) => (
+            <div
+              className="border my-3 p-3"
+              style={{ whiteSpace: "pre-wrap" }}
+              key={x.key}
+            >
+              <h3 className="text-primary">{x.author}</h3>
+              {x.text}
+              <h4 className="text-primary">{x.date}</h4>
+              {x.image !== "" ? (
+                <img src={x.image} alt={x.image} width="400" height="200"></img>
+              ) : (
+                <br></br>
+              )}
+            </div>
+          ))
+        )}
+      </div> */}
+      <div className="row">
+        <div></div>
         {JSON.parse(localStorage.getItem("allPosts")) == null ? (
           <span className="text-muted">No posts have been submitted.</span>
         ) : (

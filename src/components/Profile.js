@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../firebase";
+import { ref, deleteObject } from "firebase/storage";
 import "../App";
 import "../css/Popup.css";
 import "../css/Profile.css";
@@ -26,14 +27,23 @@ function Profile({ onSignOut }) {
         if (existingPosts[i].author !== localStorage.getItem("signedInUser")) {
           updatedPosts.push(existingPosts[i]);
         } else {
-          let imageRef = storage(existingPosts[i].image);
-          imageRef.delete();
+          if (existingPosts[i].image !== "") {
+            let imageRef = ref(storage, existingPosts[i].image);
+            deleteObject(imageRef)
+              .then(() => {
+                console.log("picture deleted");
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
         }
       }
       localStorage.setItem("allPosts", JSON.stringify(updatedPosts));
     }
-    localStorage.removeItem("signedInUser");
     localStorage.removeItem(localStorage.getItem("signedInUser"));
+    localStorage.removeItem("signedInUser");
+    alert("Account successfully deleted!");
     onSignOut();
     navigate("/");
   };
