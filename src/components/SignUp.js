@@ -65,19 +65,19 @@ const SignUp = () => {
   }
 
   return (
-    <div class="body">
+    <div className="body">
       <br/>
       <br/>
         {error !== '' && (
          <div className="center errorMsg">
-           <p class="error">{error}</p>
+           <p className="error">{error}</p>
          </div>)}
         {successMessage()}
-      <form class="forms" onSubmit={handleSubmit}>
+      <form className="forms" onSubmit={handleSubmit}>
         <div>
           <h1>Sign Up</h1>
         </div>
-          <label className="label" for="name"> Name </label>
+          <label className="label" htmlFor="name"> Name </label>
           <br/>
           <input className="auth-form"
             type="text"
@@ -87,7 +87,7 @@ const SignUp = () => {
             onChange={onChangeName}
           />
           <br/>
-          <label className="label" for="email">Email </label>
+          <label className="label" htmlFor="email">Email </label>
           <br/>
           <input className="auth-form"
             type="email"
@@ -97,7 +97,7 @@ const SignUp = () => {
             placeholder="Email"
           />
           <br/>
-          <label className="label"for="password">Password </label>
+          <label className="label" htmlFor="password">Password </label>
           <br/>
           <input className="auth-form"
             type="password"
@@ -107,7 +107,7 @@ const SignUp = () => {
             onChange={onChangePassword}
           />
           <br/>
-          <label className="label" for="confirmPassword">Confirm Password </label>
+          <label className="label" htmlFor="confirmPassword">Confirm Password </label>
           <br/>
           <input className="auth-form"
             type="password"
@@ -119,7 +119,7 @@ const SignUp = () => {
           <button className="auth-form" type="submit">
             Submit
           </button>
-        <div class="center">
+        <div className="under-text">
           <p>
             Already have an account? <a href="/sign-in">Sign in</a>.
           </p>

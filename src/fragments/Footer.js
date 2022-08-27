@@ -3,13 +3,11 @@ import "./Footer.css";
 
 function Footer(props) {
   return (
-    <html>
-      <body>
+      <section>
         <footer>
           <p>FWP Assignment 1 - Amna Alfarah Alonto, Ruchelle Balasuriya</p>
         </footer>
-      </body>
-    </html>
+      </section>
   );
 }
 

@@ -40,7 +40,7 @@ function SignIn({onSignIn}) {
             {error !== '' && (
                 <div className="center">
                     <div className="errorMsg">
-                        <p class="error">{error}</p>
+                        <p className="error">{error}</p>
                     </div>
                 </div>
             )}
@@ -56,6 +56,9 @@ function SignIn({onSignIn}) {
                 <br/>
                 <input className='auth-form'type="password" name="password" placeholder="password" value={password} onChange={onChangePassword} required/>
                 <button className="auth-form"type="submit">Submit</button>
+                <p className="under-text">
+                    Not registered? <a href="/sign-up">Sign Up</a>
+                </p>
             </form>
          </div>
     );
