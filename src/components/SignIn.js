@@ -4,7 +4,9 @@ import "../css/Forms.css";
 import "../css/styles.css";
 
 function SignIn({ onSignIn }) {
+  //instantiate email used for login
   const [email, setEmail] = useState("");
+  //instantiate password used for login
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -20,10 +22,12 @@ function SignIn({ onSignIn }) {
     setError("");
     e.preventDefault();
     console.log(JSON.parse(localStorage.getItem(email)));
-
+    //if user doesn't exist
     if (JSON.parse(localStorage.getItem(email)) === null) {
       setError("Sign in failed. Please try again.");
-    } else if (
+    }
+    //if user exists, check if credentials correct
+    else if (
       JSON.parse(localStorage.getItem(email)).email === email &&
       JSON.parse(localStorage.getItem(email)).password === password
     ) {

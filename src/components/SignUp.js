@@ -19,7 +19,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //error handling
+    //validating to confirm passwords are the same
     setError("");
     if (!(confirmPassword === password)) {
       setError("Ensure passwords match.");
@@ -42,15 +42,15 @@ const SignUp = () => {
   };
 
   const successMessage = () => {
-    
     return (
       <div className="center">
-        <div className="center succMsg"
+        <div
+          className="center succMsg"
           style={{
             //display successs message only when signup completed/submitted
-          display: submitted ? "" : "none",
+            display: submitted ? "" : "none",
           }}
-          >
+        >
           <b>User {email} successfully registered!</b>
         </div>
       </div>
@@ -74,7 +74,6 @@ const SignUp = () => {
     setEmail(e.target.value);
     setSubmitted(false);
   }
-
 
   //called every time password field changed
   function onChangePassword(e) {
