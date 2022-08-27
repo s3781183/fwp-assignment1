@@ -1,63 +1,69 @@
 import React, { useState } from "react";
+import "../css/Forms.css";
 
-const SignUp = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  // const [date, setDate] = useState("");
-
+const EditProfile = () => {
+  const [name, setName] = useState(
+    JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser"))).name
+  );
+  const [email, setEmail] = useState(
+    JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser"))).email
+  );
+  const [password, setPassword] = useState(
+    JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
+      .password
+  );
+  const [confirmPassword, setConfirmPassword] = useState(
+    JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
+      .password
+  );
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      name === "" ||
-      email === "" ||
-      password === "" ||
-      confirmPassword === ""
-    ) {
-      setError(true);
-    } else if (!email.match(/.+@+/)) {
-      setError(true);
+    setError("");
+    if (!(password === confirmPassword)) {
+      setError("Ensure passwords match.");
     } else {
+      var user = {
+        email: email,
+        name: name,
+        date: JSON.parse(
+          localStorage.getItem(localStorage.getItem("signedInUser"))
+        ).date,
+        password: password,
+      };
+      console.log(user);
+      var json = JSON.stringify(user);
+      localStorage.setItem("signedInUser", email);
+      localStorage.setItem(email, json);
       setSubmitted(true);
-      setError(false);
-      // getCurrentDate();
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
-      localStorage.setItem("password", password);
-      console.log("date:" + localStorage.getItem("date"));
+      setError("");
     }
   };
-  // function getCurrentDate() {
-  //   setDate(new Date.toISOString().slice(0, 10));
-  // }
 
   const successMessage = () => {
     return (
-      <div
-        className="success"
-        style={{
-          display: submitted ? "" : "none",
-        }}
-      >
-        <h1>User {email} successfully registered!!</h1>
+      <div className="center">
+        <div
+          className="succMsg"
+          style={{
+            display: submitted ? "" : "none",
+          }}
+        >
+          <b>
+            User{" "}
+            {
+              JSON.parse(
+                localStorage.getItem(localStorage.getItem("signedInUser"))
+              ).email
+            }
+          <br/>
+            successfully edited!
+          </b>
+        </div> 
       </div>
-    );
-  };
 
-  const errorMessage = () => {
-    return (
-      <div
-        className="error"
-        style={{
-          display: error ? "" : "none",
-        }}
-      >
-        <h2>Please enter all the fields</h2>
-      </div>
     );
   };
 
@@ -66,70 +72,99 @@ const SignUp = () => {
     setSubmitted(false);
   };
 
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+    setSubmitted(false);
+  };
   const onChangeName = (e) => {
     setName(e.target.value);
     setSubmitted(false);
   };
 
-  function onChangeEmail(e) {
+  const onChangeEmail = (e) => {
     setEmail(e.target.value);
     setSubmitted(false);
-  }
-  function onChangePassword(e) {
-    setPassword(e.target.value);
-    setSubmitted(false);
-  }
-
-  //   function getData() {
-  //     console.log("email:" + localStorage.getItem("email"));
-  //     console.log("password:" + localStorage.getItem("password"));
-  //   }
+  };
 
   return (
-    <div class="container">
-      <div className="messages">
-        {errorMessage()}
-        {successMessage()}
-      </div>
-      <form>
+    <div className="body">
+      <br />
+      <br />
+      {error !== "" && (
+        <div className="center errorMsg">
+          <p className="error">{error}</p>
+        </div>
+      )}
+      {successMessage()}
+      <form className="forms" onSubmit={handleSubmit}>
         <div>
-          <label for="name"> Name </label>
-          <input
-            autocomplete="off"
-            type="text"
-            name=""
-            className="form__input"
-            placeholder="Name"
-            value={localStorage.getItem("name")}
-            onChange={onChangeName}
-          />
+          <h1>Edit Profile</h1>
         </div>
-        <div className="email">
-          <label for="email">email </label>
-          <input
-            type="Email"
-            value={email}
-            onChange={onChangeEmail}
-            placeholder="email"
-          />
-        </div>
-        <div>
-          <label for="password">Password </label>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={onChangePassword}
-          />
-        </div>
-        <div class="footer">
-          <button onClick={handleSubmit} className="btn" type="submit">
-            Save Change
-          </button>
-        </div>
+        <label className="label"> Name </label>
+        <br />
+        <input
+          id="name"
+          className="auth-form"
+          type="text"
+          required="required"
+          placeholder="name"
+          defaultValue={
+            JSON.parse(
+              localStorage.getItem(localStorage.getItem("signedInUser"))
+            ).name
+          }
+          onChange={onChangeName}
+        />
+        <br />
+        <label className="label">Email </label>
+        <br />
+        <input
+          id="email"
+          className="auth-form"
+          type="email"
+          required="required"
+          defaultValue={localStorage.getItem("signedInUser")}
+          onChange={onChangeEmail}
+          placeholder="email"
+        />
+        <br />
+        <label className="label">Password </label>
+        <br />
+        <input
+          id="password"
+          className="auth-form"
+          type="password"
+          required="required"
+          placeholder="password"
+          defaultValue={
+            JSON.parse(
+              localStorage.getItem(localStorage.getItem("signedInUser"))
+            ).password
+          }
+          onChange={onChangePassword}
+        />
+        <br />
+        <label className="label">Confirm Password </label>
+        <br />
+        <input
+          id="confirmPassword"
+          className="auth-form"
+          type="password"
+          required="required"
+          placeholder="confirm password"
+          defaultValue={
+            JSON.parse(
+              localStorage.getItem(localStorage.getItem("signedInUser"))
+            ).password
+          }
+          onChange={onChangeConfirmPassword}
+        />
+        <button className="auth-form" type="submit">
+          Submit Changes
+        </button>
       </form>
     </div>
   );
 };
 
-export default SignUp;
+export default EditProfile;

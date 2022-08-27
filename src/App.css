@@ -71,12 +71,6 @@ li a.active {
   padding: 2px 25px;
 }
 
-/* li a:hover:not(.active) {
-  background-color: steelblue;
-  color: white;
-  padding: 2px 25px;
-} */
-
 h2 {
   text-align: center;
   margin-bottom: 40px;
@@ -104,4 +98,7 @@ label {
 .position{
   text-align:center;
   vertical-align:middle;
+}
+p {
+  color: red;
 }

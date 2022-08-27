@@ -25,6 +25,12 @@ p.error {
     border: none;
 }
 
+p.success {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+
 form.forms {
     width: 40%;
     border: 2px solid rgb(93, 113, 28);
@@ -42,6 +48,19 @@ div.errorMsg {
     background: #ff8888;
     border-radius: 15px;
 }
+
+div.succMsg {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    height: 60px;
+    border: 2px solid green;
+    background: greenyellow;
+    border-radius: 15px;
+    padding: 10px;
+
+}
+
 
 * {
     font-family: tahoma;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../css/SignUp.css";
+import moment from "moment";
+// import "../css/SignUp.css";
 import "../css/Forms.css";
 
 const SignUp = () => {
@@ -7,40 +8,44 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [date, setDate] = useState("");
+  const [date] = useState(moment(new Date()).format("LL"));
 
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     if (!(confirmPassword === password)) {
       setError("Ensure passwords match.");
+    } else if (password.length < 8) {
     } else {
+      setError("");
+      var user = {
+        email: email,
+        name: name,
+        date: date,
+        password: password,
+      };
+
+      var json = JSON.stringify(user);
+      localStorage.setItem(email, json);
       setSubmitted(true);
-      setError('');
-      getCurrentDate();
-      localStorage.setItem("date", date);
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
-      localStorage.setItem("password", password);
-      //console.log("date:" + localStorage.getItem("date"));
+      console.log(user);
     }
   };
-  function getCurrentDate() {
-    setDate(new Date());
-  }
 
   const successMessage = () => {
+    
     return (
-      <div
-        className="success"
-        style={{
+      <div className="center">
+        <div className="center succMsg"
+          style={{
           display: submitted ? "" : "none",
-        }}
-      >
-        <h1>User {email} successfully registered!!</h1>
+          }}
+          >
+          <b>User {email} successfully registered!</b>
+        </div>
       </div>
     );
   };
@@ -66,60 +71,68 @@ const SignUp = () => {
 
   return (
     <div className="body">
-      <br/>
-      <br/>
-        {error !== '' && (
-         <div className="center errorMsg">
-           <p className="error">{error}</p>
-         </div>)}
-        {successMessage()}
+      <br />
+      <br />
+      {error !== "" && (
+        <div className="center">
+          <div className="errorMsg">
+            <p className="error">{error}</p>
+          </div>
+        </div>
+      )}
+      {successMessage()}
       <form className="forms" onSubmit={handleSubmit}>
         <div>
           <h1>Sign Up</h1>
         </div>
-          <label className="label" htmlFor="name"> Name </label>
-          <br/>
-          <input className="auth-form"
-            type="text"
-            required="required"
-            placeholder="Name"
-            value={name}
-            onChange={onChangeName}
-          />
-          <br/>
-          <label className="label" htmlFor="email">Email </label>
-          <br/>
-          <input className="auth-form"
-            type="email"
-            required="required"
-            value={email}
-            onChange={onChangeEmail}
-            placeholder="Email"
-          />
-          <br/>
-          <label className="label" htmlFor="password">Password </label>
-          <br/>
-          <input className="auth-form"
-            type="password"
-            required="required"
-            placeholder="Password"
-            value={password}
-            onChange={onChangePassword}
-          />
-          <br/>
-          <label className="label" htmlFor="confirmPassword">Confirm Password </label>
-          <br/>
-          <input className="auth-form"
-            type="password"
-            required="required"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={onChangeConfirmPassword}
-          />
-          <button className="auth-form" type="submit">
-            Submit
-          </button>
-        <div className="under-text">
+        <label className="label"> Name </label>
+        <br />
+        <input
+          className="auth-form"
+          type="text"
+          required="required"
+          placeholder="name"
+          value={name}
+          onChange={onChangeName}
+        />
+        <br />
+        <label className="label">Email </label>
+        <br />
+        <input
+          className="auth-form"
+          type="email"
+          required="required"
+          value={email}
+          onChange={onChangeEmail}
+          placeholder="email"
+        />
+        <br />
+        <label className="label">Password (min 8 characters) </label>
+        <br />
+        <input
+          className="auth-form"
+          type="password"
+          minLength="8"
+          required="required"
+          placeholder="password"
+          value={password}
+          onChange={onChangePassword}
+        />
+        <br />
+        <label className="label">Confirm Password </label>
+        <br />
+        <input
+          className="auth-form"
+          type="password"
+          required="required"
+          placeholder="confirm password"
+          value={confirmPassword}
+          onChange={onChangeConfirmPassword}
+        />
+        <button className="auth-form" type="submit">
+          Submit
+        </button>
+        <div className="center">
           <p>
             Already have an account? <a href="/sign-in">Sign in</a>.
           </p>
