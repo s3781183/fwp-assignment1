@@ -8,7 +8,7 @@ import Landing from "./components/Landing";
 import Profile from "./components/Profile";
 import SignIn from "./components/SignIn";
 import EditProfile from "./components/EditProfile";
-import Post from "./components/Post";
+import Post from "./components/Post/Post";
 
 function App() {
   const [signedInUser, setSignedInUser] = useState(

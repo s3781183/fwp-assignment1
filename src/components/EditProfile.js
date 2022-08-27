@@ -106,8 +106,10 @@ const EditProfile = () => {
       <br />
       <br />
       {error !== "" && (
-        <div className="center errorMsg">
-          <p className="error">{error}</p>
+        <div className="center">
+          <div className="errorMsg">
+            <p className="error">{error}</p>
+          </div>
         </div>
       )}
       {successMessage()}
