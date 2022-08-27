@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import moment from "moment";
-// import "../css/SignUp.css";
 import "../css/Forms.css";
 
 const SignUp = () => {
+  //instantiate current user's name
   const [name, setName] = useState("");
+  //instantiate current user's email
   const [email, setEmail] = useState("");
+  //instantiate current user's password
   const [password, setPassword] = useState("");
+  //instantiate current user's confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
+  //instantiate current user's joined date
   const [date] = useState(moment(new Date()).format("LL"));
 
   const [submitted, setSubmitted] = useState(false);
@@ -15,19 +19,21 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //error handling
     setError("");
     if (!(confirmPassword === password)) {
       setError("Ensure passwords match.");
     } else if (password.length < 8) {
     } else {
       setError("");
+      //create user object with details
       var user = {
         email: email,
         name: name,
         date: date,
         password: password,
       };
-
+      //converts javascript value (user) to json string
       var json = JSON.stringify(user);
       localStorage.setItem(email, json);
       setSubmitted(true);
@@ -41,6 +47,7 @@ const SignUp = () => {
       <div className="center">
         <div className="center succMsg"
           style={{
+            //display successs message only when signup completed/submitted
           display: submitted ? "" : "none",
           }}
           >
@@ -50,20 +57,26 @@ const SignUp = () => {
     );
   };
 
+  //called every time confirmPassword field changed
   const onChangeConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
     setSubmitted(false);
   };
 
+  //called every time name field changed
   const onChangeName = (e) => {
     setName(e.target.value);
     setSubmitted(false);
   };
 
+  //called every time email field changed
   function onChangeEmail(e) {
     setEmail(e.target.value);
     setSubmitted(false);
   }
+
+
+  //called every time password field changed
   function onChangePassword(e) {
     setPassword(e.target.value);
     setSubmitted(false);

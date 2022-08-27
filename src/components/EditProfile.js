@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import "../css/Forms.css";
 
 const EditProfile = () => {
+  //instantiate name with current user's name
   const [name, setName] = useState(
     JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser"))).name
   );
+  //instantiate email with current user's email
   const [email, setEmail] = useState(
     JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser"))).email
   );
+   //instantiate password with current user's password 
   const [password, setPassword] = useState(
     JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
       .password
   );
+
+  //instantiate confirmPassword with current user's password
   const [confirmPassword, setConfirmPassword] = useState(
     JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
       .password
@@ -22,9 +27,11 @@ const EditProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
+    //error handling to confirm passwords are the same. 
     if (!(password === confirmPassword)) {
       setError("Ensure passwords match.");
     } else {
+      //creates new user object with updated details
       var user = {
         email: email,
         name: name,
@@ -34,7 +41,9 @@ const EditProfile = () => {
         password: password,
       };
       console.log(user);
+      //converts javascript value (user) to json string
       var json = JSON.stringify(user);
+      //updates signedIn user
       localStorage.setItem("signedInUser", email);
       localStorage.setItem(email, json);
       setSubmitted(true);
@@ -48,6 +57,7 @@ const EditProfile = () => {
         <div
           className="succMsg"
           style={{
+            //if submitted display success message
             display: submitted ? "" : "none",
           }}
         >
@@ -67,20 +77,25 @@ const EditProfile = () => {
     );
   };
 
+  //called every time confirmPassword field changed
   const onChangeConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
     setSubmitted(false);
   };
 
+  //called every time password field changed
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     setSubmitted(false);
   };
+
+  //called every time name field changed
   const onChangeName = (e) => {
     setName(e.target.value);
     setSubmitted(false);
   };
 
+  //called every time email field changed
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
     setSubmitted(false);
