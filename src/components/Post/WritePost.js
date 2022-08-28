@@ -4,6 +4,9 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase";
 import { v4 } from "uuid";
 import "../../css/Post.css";
+import "../../css/WritePost.css";
+
+
 
 function WritePost() {
     const [text, setText] = useState("");
@@ -56,47 +59,44 @@ function WritePost() {
         console.log(JSON.parse(localStorage.getItem("allPosts")));
       }
     };
+
+
     return ( 
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            <legend>New Post</legend>
-            <div className="form-group">
-              <textarea
-                name="post"
-                id="post"
-                className="form-control"
-                rows="3"
-                value={text}
-                onChange={handleTextChange}
-              />
-            </div>
-            <div className="App">
-              <input
-                type="file"
-                onChange={(event) => {
-                  setImageUpload(event.target.files[0]);
-                }}
-              />
-            </div>
-            {errorMessage !== null && (
-              <div className="form-group">
-                <span className="text-danger">{errorMessage}</span>
-              </div>
-            )}
-            <div className="form-group">
-              <input
-                type="button"
-                className="btn btn-danger mr-5"
-                value="Cancel"
-                onClick={() => {
-                  setText("");
-                  setErrorMessage(null);
-                }}
-              />
-              <input type="submit" className="btn btn-primary" value="Post" />
-            </div>
-          </fieldset>
-        </form>
+        <div className="container">
+                <form>
+                    <div className="post-input">
+                        <input
+                            value={text}
+                            onChange={handleTextChange}
+                            placeholder="Share your thoughts!"
+                            type="text"
+                        />
+                    </div>
+                    <input
+                        type="file" 
+                        accept="image/jpeg, image/png, image/jpg"
+                        onChange={(event) => {
+                        setImageUpload(event.target.files[0]);
+                        }}
+                    />
+                    {errorMessage !== null && (
+                    <div className="form-group">
+                        <span className="text-danger">{errorMessage}</span>
+                    </div>
+                    )}
+                    <input
+                        type="button"
+                        className="btn btn-danger mr-5"
+                        value="Cancel"
+                        onClick={() => {
+                        setText("");
+                        setErrorMessage(null);
+                        }}
+                    />
+                    <button onClick={handleSubmit} type="submit">Post</button>
+                </form>
+        </div>
+
     );
 
 }
