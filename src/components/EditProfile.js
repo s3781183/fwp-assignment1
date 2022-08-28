@@ -10,7 +10,7 @@ const EditProfile = () => {
   const [email, setEmail] = useState(
     JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser"))).email
   );
-   //instantiate password with current user's password 
+  //instantiate password with current user's password
   const [password, setPassword] = useState(
     JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
       .password
@@ -27,7 +27,7 @@ const EditProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
-    //error handling to confirm passwords are the same. 
+    //validating to confirm passwords are the same.
     if (!(password === confirmPassword)) {
       setError("Ensure passwords match.");
     } else {
@@ -68,12 +68,11 @@ const EditProfile = () => {
                 localStorage.getItem(localStorage.getItem("signedInUser"))
               ).email
             }
-          <br/>
+            <br />
             successfully edited!
           </b>
-        </div> 
+        </div>
       </div>
-
     );
   };
 

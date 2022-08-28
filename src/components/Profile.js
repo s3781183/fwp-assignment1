@@ -7,13 +7,16 @@ import "../css/Popup.css";
 import "../css/Profile.css";
 
 function Profile({ onSignOut }) {
+  //instansiate popup for delete user
   const [popup, setPopup] = useState(false);
   const navigate = useNavigate();
 
+  //turn popup on/off
   const togglePopup = () => {
     setPopup(!popup);
   };
 
+  //navigate to edit-profile page
   const editProfile = () => {
     navigate("/edit-profile");
   };
@@ -21,12 +24,16 @@ function Profile({ onSignOut }) {
   const deleteProfile = () => {
     var existingPosts = JSON.parse(localStorage.getItem("allPosts"));
     var updatedPosts = [];
+    //check if posts exist
     if (existingPosts != null) {
+      //iterate through posts
       for (let i = 0; i < existingPosts.length; i++) {
         console.log(existingPosts);
+        //if the post has been made by the signedIn user
         if (existingPosts[i].author !== localStorage.getItem("signedInUser")) {
           updatedPosts.push(existingPosts[i]);
         } else {
+          //if image exists, then delete from firebase
           if (existingPosts[i].image !== "") {
             let imageRef = ref(storage, existingPosts[i].image);
             deleteObject(imageRef)
@@ -39,8 +46,10 @@ function Profile({ onSignOut }) {
           }
         }
       }
+      //replace previous allPost array with updated one
       localStorage.setItem("allPosts", JSON.stringify(updatedPosts));
     }
+    //remove signed in user's details
     localStorage.removeItem(localStorage.getItem("signedInUser"));
     localStorage.removeItem("signedInUser");
     alert("Account successfully deleted!");
@@ -54,7 +63,6 @@ function Profile({ onSignOut }) {
       <div className="body">
         <div className="card">
           <br></br>
-          {/* <img class="material-icons">account_circle</img> */}
           <h1>
             {
               JSON.parse(
@@ -66,8 +74,9 @@ function Profile({ onSignOut }) {
           <p></p>
           Joined:
           {
-            JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser")))
-              .date
+            JSON.parse(
+              localStorage.getItem(localStorage.getItem("signedInUser"))
+            ).date
           }
           <div>
             <button className="profile" onClick={editProfile}>
@@ -102,8 +111,7 @@ function Profile({ onSignOut }) {
           )}
         </div>
       </div>
-
-      </div>
+    </div>
   );
 }
 export default Profile;
