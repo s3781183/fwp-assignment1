@@ -64,46 +64,49 @@ function WritePost() {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <fieldset>
-        <legend>New Post</legend>
-        <div className="form-group">
-          <textarea
-            name="post"
-            id="post"
-            className="form-control"
-            rows="3"
-            value={text}
-            onChange={handleTextChange}
-          />
-        </div>
-        <div className="App">
-          <input
-            type="file"
-            onChange={(event) => {
-              setImageUpload(event.target.files[0]);
-            }}
-          />
-        </div>
-        {errorMessage !== null && (
+    <div className="container">
+      <form onSubmit={handleSubmit}>
+        <fieldset>
+          <legend>New Post</legend>
           <div className="form-group">
-            <span className="text-danger">{errorMessage}</span>
+            <textarea
+              name="post"
+              id="post"
+              className="form-control"
+              rows="3"
+              value={text}
+              onChange={handleTextChange}
+            />
           </div>
-        )}
-        <div className="form-group">
-          <input
-            type="button"
-            className="btn btn-danger mr-5"
-            value="Cancel"
-            onClick={() => {
-              setText("");
-              setErrorMessage(null);
-            }}
-          />
-          <input type="submit" className="btn btn-primary" value="Post" />
-        </div>
-      </fieldset>
-    </form>
+          <div className="App">
+            <input
+              type="file"
+              onChange={(event) => {
+                setImageUpload(event.target.files[0]);
+              }}
+            />
+          </div>
+          {errorMessage !== null && (
+            <div className="form-group">
+              <span className="text-danger">{errorMessage}</span>
+            </div>
+          )}
+          <div className="form-group">
+            <input
+              type="button"
+              className="btn btn-danger mr-5"
+              value="Cancel"
+              onClick={() => {
+                setText("");
+                setErrorMessage(null);
+              }}
+            />
+            <input type="submit" className="btn btn-primary" value="Post" />
+          </div>
+        </fieldset>
+      </form>
+
+    </div>
   );
 }
 

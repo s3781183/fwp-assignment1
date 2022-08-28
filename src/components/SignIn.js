@@ -4,6 +4,7 @@ import "../css/Forms.css";
 import "../css/styles.css";
 
 function SignIn({ onSignIn }) {
+  document.title="LAN | Sign In";
   //instantiate email used for login
   const [email, setEmail] = useState("");
   //instantiate password used for login

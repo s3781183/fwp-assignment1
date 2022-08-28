@@ -3,6 +3,7 @@ import moment from "moment";
 import "../css/Forms.css";
 
 const SignUp = () => {
+  document.title="LAN | Sign Up";
   //instantiate current user's name
   const [name, setName] = useState("");
   //instantiate current user's email

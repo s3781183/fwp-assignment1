@@ -2,8 +2,9 @@ import ViewPosts from "./ViewPosts";
 import WritePost from "./WritePost";
 
 function Forum() {
+  document.title="LAN | Post";
   return (
-    <div className="body">
+    <div>
       <WritePost />
       <hr />
       <ViewPosts />

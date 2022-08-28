@@ -7,6 +7,8 @@ import "../css/Popup.css";
 import "../css/Profile.css";
 
 function Profile({ onSignOut }) {
+  document.title="LAN | My Profile";
+
   //instansiate popup for delete user
   const [popup, setPopup] = useState(false);
   const navigate = useNavigate();

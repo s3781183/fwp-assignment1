@@ -2,6 +2,7 @@ import image from "./online-work.jpg";
 import '../css/Landing.css';
 
 function Landing() {
+  document.title="LAN";
   return (
     <div className="page">
       <div className="container">

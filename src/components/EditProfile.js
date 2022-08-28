@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../css/Forms.css";
 
 const EditProfile = () => {
+  document.title = "LAN | Edit Profile";
   //instantiate name with current user's name
   const [name, setName] = useState(
     JSON.parse(localStorage.getItem(localStorage.getItem("signedInUser"))).name
