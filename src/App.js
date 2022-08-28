@@ -14,15 +14,15 @@ function App() {
   const [signedInUser, setSignedInUser] = useState(
     localStorage.getItem("signedInUser")
   );
-  //const navigate = useNavigate();
 
+    //pass as props to set user as signed in user
   const onSignIn = (email) => {
     setSignedInUser(email);
     localStorage.setItem("signedInUser", email);
   };
 
+  //removes signed in user in the local storage once logged out
   const onSignOut = () => {
-    //navigate('/', {replace:true});
     setSignedInUser(null);
     localStorage.removeItem("signedInUser");
   };

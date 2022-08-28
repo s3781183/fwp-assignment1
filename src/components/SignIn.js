@@ -32,9 +32,11 @@ function SignIn({ onSignIn }) {
       JSON.parse(localStorage.getItem(email)).email === email &&
       JSON.parse(localStorage.getItem(email)).password === password
     ) {
+      //save email as SignedInUser
       onSignIn(email);
       navigate("/profile");
     } else {
+
       setError("Sign in failed. Please try again.");
     }
   }
@@ -43,6 +45,8 @@ function SignIn({ onSignIn }) {
     <div className="body">
       <br />
       <br />
+
+      {/** Display error message if error mesage has been set*/}
 
       {error !== "" && (
         <div className="center">
